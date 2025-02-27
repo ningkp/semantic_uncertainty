@@ -277,7 +277,9 @@ def init_model(args):
     if 'llama' in mn.lower() or 'falcon' in mn or 'mistral' in mn.lower():
         model = HuggingfaceModel(
             mn, stop_sequences='default',
-            max_new_tokens=args.model_max_new_tokens)
+            max_new_tokens=args.model_max_new_tokens,
+            device_map="cuda:3"
+        )
     else:
         raise ValueError(f'Unknown model_name `{mn}`.')
     return model
